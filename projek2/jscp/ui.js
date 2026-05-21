@@ -1,4 +1,4 @@
-﻿
+
 let isLandscape = false;
 let matrixInterval = null;
 const confettiPool = [];

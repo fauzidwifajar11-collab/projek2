@@ -1652,7 +1652,7 @@ class PricingCalculator {
                 matrixColor2: document.getElementById('matrixColor2')?.value || '#ffc0cb',
                 sequence: document.getElementById('sequenceText')?.value || 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
                 sequenceColor: document.getElementById('sequenceColor')?.value || '#d39b9b',
-                gift: document.getElementById('giftImage')?.value || 'image/iyan & anis.png',
+                gift: document.getElementById('giftImage')?.value || '',
                 enableBook: document.getElementById('enableBook')?.value === 'true',
                 enableHeart: document.getElementById('enableHeart')?.value === 'true',
                 isSave: isSaveValue,
