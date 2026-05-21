@@ -11,7 +11,7 @@ let settings = {
     matrixColor2: '#ff1493', // Màu pink mẫu
     sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
     sequenceColor: '#ff69b4', // Màu pink mẫu
-    gift: '',
+    gift: './image/iyan & anis.png',
     enableBook: true,
     pages: [
         // --- Lembar 1 (data-page="0") ---
@@ -89,7 +89,7 @@ const gifOptions = [
     { value: './gif/Cat Love GIF by KIKI.gif', label: 'Gif2' },
     { value: './gif/Happy-Birthday-GIF-by-BREAD-TR-unscreen.gif', label: 'Gif3' },
     { value: './gif/happy2.gif', label: 'Gif4' },
-    { value: './gif/happy3.gif', label: 'Gif5' },
+    { value: './image/iyan & anis.png', label: 'Iyan & Anis' },
 ];
 const musicPreviewButton = document.getElementById('musicPreviewButton');
 const musicPreviewStatus = document.getElementById('musicPreviewStatus');
@@ -351,7 +351,7 @@ function initializeDefaultSettings() {
         matrixColor2: '#ff1493', // Màu pink mẫu
         sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
         sequenceColor: '#ff69b4', // Màu pink mẫu
-        gift: '',
+        gift: './image/iyan & anis.png',
         enableBook: true,
         enableHeart: true,
         isSave: false,  
