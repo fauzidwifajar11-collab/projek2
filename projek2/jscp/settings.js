@@ -9,9 +9,9 @@ let settings = {
     matrixText: 'HAPPYANNIVERSARY',
     matrixColor1: '#ff69b4', // Màu pink mẫu
     matrixColor2: '#ff1493', // Màu pink mẫu
-    sequence: 'HAPPY|ANNIVERSARY|ANIS|❤',
+    sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
     sequenceColor: '#ff69b4', // Màu pink mẫu
-    gift: './image/happy3.gif',
+    gift: './image/iyan & anis.png',
     enableBook: true,
     pages: [
         // --- Lembar 1 (data-page="0") ---
@@ -89,7 +89,7 @@ const gifOptions = [
     { value: './gif/Cat Love GIF by KIKI.gif', label: 'Gif2' },
     { value: './gif/Happy-Birthday-GIF-by-BREAD-TR-unscreen.gif', label: 'Gif3' },
     { value: './gif/happy2.gif', label: 'Gif4' },
-    { value: './gif/happy3.gif', label: 'Gif5' },
+    { value: './image/iyan & anis.png', label: 'Iyan & Anis' },
 ];
 const musicPreviewButton = document.getElementById('musicPreviewButton');
 const musicPreviewStatus = document.getElementById('musicPreviewStatus');
@@ -349,9 +349,9 @@ function initializeDefaultSettings() {
         matrixText: 'HAPPYANNIVERSARY',
         matrixColor1: '#ff69b4', // Màu pink mẫu
         matrixColor2: '#ff1493', // Màu pink mẫu
-        sequence: 'HAPPY|ANNIVERSARY|ANIS|❤',
+        sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
         sequenceColor: '#ff69b4', // Màu pink mẫu
-        gift: './image/happy3.gif',
+        gift: './image/iyan & anis.png',
         enableBook: true,
         enableHeart: true,
         isSave: false,  
@@ -1403,7 +1403,7 @@ applySettingsButton.addEventListener('click', () => {
     settings.matrixText = document.getElementById('matrixText').value || 'HAPPYANNIVERSARY';
     settings.matrixColor1 = document.getElementById('matrixColor1').value;
     settings.matrixColor2 = document.getElementById('matrixColor2').value;
-    settings.sequence = document.getElementById('sequenceText').value || 'HAPPY|ANNIVERSARY|ANIS|❤';
+    settings.sequence = document.getElementById('sequenceText').value || 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤';
     settings.sequenceColor = document.getElementById('sequenceColor').value;
     settings.gift = document.getElementById('giftImage').value;
     

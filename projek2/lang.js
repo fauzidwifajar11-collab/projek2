@@ -1,6 +1,6 @@
 const translations = {
     id: {
-        title: "Made For Anis 🎁",
+        title: "Made For Iyan & Anis 🎁",
         description: "Hadiah penuh cinta menunggumu untuk ditemukan! Klik untuk melihat pesan spesial!",
         login: "Masuk dengan Google",
         logout: "Keluar",
