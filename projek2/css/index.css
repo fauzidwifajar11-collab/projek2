@@ -1540,5 +1540,78 @@
       font-weight: 600;
   }
 
- 
+/* Romantic Ending Page Styles */
+#romantic-ending.fade-in-active {
+    opacity: 1 !important;
+    pointer-events: auto !important;
+}
 
+/* Green Glow Firework / Flower Effect */
+.glow-core {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    animation: pulse-core 3s infinite alternate ease-in-out;
+}
+
+@keyframes pulse-core {
+    0% { transform: translate(-50%, -50%) scale(0.8); opacity: 0.8; box-shadow: 0 0 20px #00ffcc, 0 0 40px #00ffcc; }
+    100% { transform: translate(-50%, -50%) scale(1.5); opacity: 1; box-shadow: 0 0 50px #00ffcc, 0 0 100px #00ffcc, 0 0 150px #00ffcc; }
+}
+
+.firework-particle {
+    position: absolute;
+    width: 6px;
+    height: 6px;
+    background-color: #00ffcc;
+    border-radius: 50%;
+    box-shadow: 0 0 10px #00ffcc, 0 0 20px #00ffcc;
+    top: 50%;
+    left: 50%;
+    transform-origin: center;
+    opacity: 0;
+}
+
+/* Message Box Animations */
+.message-pill {
+    background: rgba(10, 10, 10, 0.8);
+    border: 1px solid rgba(255, 42, 133, 0.4);
+    box-shadow: 0 0 10px rgba(255, 42, 133, 0.2), inset 0 0 10px rgba(255, 42, 133, 0.1);
+    backdrop-filter: blur(8px);
+    border-radius: 9999px;
+    padding: 12px 24px;
+    opacity: 0;
+    transform: translateY(20px);
+    animation: float-pill 4s ease-in-out infinite alternate;
+}
+
+.message-pill.show-pill {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 1s ease-out, transform 1s ease-out;
+}
+
+@keyframes float-pill {
+    0% { transform: translateY(0px); box-shadow: 0 0 10px rgba(255, 42, 133, 0.2); }
+    100% { transform: translateY(-8px); box-shadow: 0 0 20px rgba(255, 42, 133, 0.6); }
+}
+
+.message-text {
+    background: linear-gradient(to right, #ff2a85, #ff80bf);
+    -webkit-background-clip: text;
+    -webkit-text-fill-color: transparent;
+    text-shadow: 0 0 15px rgba(255, 42, 133, 0.5);
+    white-space: nowrap;
+    overflow: hidden;
+    border-right: 2px solid #ff2a85;
+}
+
+.blink-cursor {
+    animation: blink 0.7s step-end infinite;
+}
+
+@keyframes blink {
+    0%, 100% { border-color: transparent; }
+    50% { border-color: #ff2a85; }
+}

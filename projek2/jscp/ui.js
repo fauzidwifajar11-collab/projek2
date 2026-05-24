@@ -1194,6 +1194,13 @@ function checkBookFinished() {
                 const currentSettings = window.settings || settings;
                 if (currentSettings.enableHeart) {
                     startHeartEffect();
+                    // Show romantic ending after heart effect finishes
+                    setTimeout(() => {
+                        showRomanticEnding();
+                    }, 4000);
+                } else {
+                    // Show romantic ending directly
+                    showRomanticEnding();
                 }
             }, 1000);
         }
@@ -1685,4 +1692,261 @@ if (book) {
     book.addEventListener('touchstart', forcePlayMusic, { passive: true, once: true });
     book.addEventListener('mousedown', forcePlayMusic, { once: true });
     book.addEventListener('click', forcePlayMusic, { once: true });
+}
+
+// =============================================
+// ROMANTIC CYBERPUNK ENDING PAGE
+// =============================================
+
+const romanticMessages = [
+    "Kamu adalah bintang di langit malamku ✨",
+    "Setiap detik bersamamu adalah keajaiban 💖",
+    "Cinta kita abadi seperti bintang 🌙",
+    "Aku mencintaimu lebih dari kata-kata 💕",
+    "Happy Anniversary, sayangku 🥂"
+];
+
+function showRomanticEnding() {
+    const romanticEl = document.getElementById('romantic-ending');
+    if (!romanticEl) return;
+
+    // Show the container
+    romanticEl.classList.remove('hidden');
+    romanticEl.style.display = 'flex';
+
+    // Hide book and other elements
+    const bookContainer = document.querySelector('.book-container');
+    const book = document.getElementById('book');
+    if (bookContainer) bookContainer.style.display = 'none';
+    if (book) book.style.display = 'none';
+
+    // Fade in after a tiny delay
+    requestAnimationFrame(() => {
+        requestAnimationFrame(() => {
+            romanticEl.classList.add('fade-in-active');
+        });
+    });
+
+    // Start sparkle particles in background
+    startSparkleParticles(romanticEl);
+
+    // Start green firework explosion sequence
+    setTimeout(() => {
+        launchGreenFirework();
+    }, 600);
+
+    // Show messages with stagger
+    setTimeout(() => {
+        showRomanticMessages();
+    }, 1800);
+
+    // Setup close button
+    const closeBtn = document.getElementById('btn-close-romantic');
+    if (closeBtn) {
+        closeBtn.addEventListener('click', closeRomanticEnding, { once: true });
+    }
+}
+
+function closeRomanticEnding() {
+    const romanticEl = document.getElementById('romantic-ending');
+    if (!romanticEl) return;
+
+    romanticEl.classList.remove('fade-in-active');
+    setTimeout(() => {
+        romanticEl.style.display = 'none';
+        romanticEl.classList.add('hidden');
+        // Clean up particles
+        const sparkles = romanticEl.querySelectorAll('.sparkle-particle');
+        sparkles.forEach(s => s.remove());
+        const fwParticles = document.getElementById('firework-particles-container');
+        if (fwParticles) fwParticles.innerHTML = '';
+        const msgContainer = document.getElementById('romantic-messages');
+        if (msgContainer) msgContainer.innerHTML = '';
+    }, 1000);
+}
+
+// --- Green Firework / Flower Explosion ---
+function launchGreenFirework() {
+    const container = document.getElementById('firework-particles-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const numPetals = 24;
+    const burstRadius = Math.min(window.innerWidth, window.innerHeight) * 0.3;
+
+    for (let i = 0; i < numPetals; i++) {
+        const petal = document.createElement('div');
+        petal.className = 'firework-particle';
+
+        const angle = (i / numPetals) * 360;
+        const rad = (angle * Math.PI) / 180;
+        const tx = Math.cos(rad) * burstRadius;
+        const ty = Math.sin(rad) * burstRadius;
+        const delay = Math.random() * 0.3;
+        const size = 4 + Math.random() * 5;
+
+        petal.style.width = size + 'px';
+        petal.style.height = size + 'px';
+
+        petal.style.animation = `none`;
+        container.appendChild(petal);
+
+        // Animate via JS for cinematic control
+        requestAnimationFrame(() => {
+            petal.style.transition = `all 1.5s cubic-bezier(0.22, 1, 0.36, 1) ${delay}s`;
+            petal.style.opacity = '1';
+            petal.style.transform = `translate(${tx}px, ${ty}px)`;
+            petal.style.boxShadow = `0 0 12px #00ffcc, 0 0 25px #00ffcc`;
+        });
+
+        // Fade out petals slowly
+        setTimeout(() => {
+            petal.style.transition = 'opacity 2s ease-out';
+            petal.style.opacity = '0';
+        }, 2000 + delay * 1000);
+    }
+
+    // Second burst wave (smaller, delayed)
+    setTimeout(() => {
+        const wave2 = 16;
+        const radius2 = burstRadius * 0.5;
+        for (let i = 0; i < wave2; i++) {
+            const p = document.createElement('div');
+            p.className = 'firework-particle';
+            const angle = (i / wave2) * 360 + 7.5;
+            const rad = (angle * Math.PI) / 180;
+            const tx = Math.cos(rad) * radius2;
+            const ty = Math.sin(rad) * radius2;
+            p.style.width = '3px';
+            p.style.height = '3px';
+            p.style.background = '#80ffdd';
+            p.style.boxShadow = '0 0 8px #80ffdd';
+            container.appendChild(p);
+
+            requestAnimationFrame(() => {
+                p.style.transition = 'all 1.2s cubic-bezier(0.22, 1, 0.36, 1)';
+                p.style.opacity = '1';
+                p.style.transform = `translate(${tx}px, ${ty}px)`;
+            });
+
+            setTimeout(() => {
+                p.style.transition = 'opacity 1.5s ease-out';
+                p.style.opacity = '0';
+            }, 2500);
+        }
+    }, 800);
+}
+
+// --- Sparkle Particles ---
+let sparkleInterval = null;
+function startSparkleParticles(container) {
+    if (sparkleInterval) clearInterval(sparkleInterval);
+
+    sparkleInterval = setInterval(() => {
+        if (!container || container.style.display === 'none') {
+            clearInterval(sparkleInterval);
+            sparkleInterval = null;
+            return;
+        }
+
+        const sparkle = document.createElement('div');
+        sparkle.className = 'sparkle-particle';
+        const x = Math.random() * 100;
+        const y = Math.random() * 100;
+        const size = 2 + Math.random() * 3;
+        const dur = 2 + Math.random() * 2;
+
+        Object.assign(sparkle.style, {
+            position: 'absolute',
+            left: x + '%',
+            top: y + '%',
+            width: size + 'px',
+            height: size + 'px',
+            borderRadius: '50%',
+            background: '#ff2a85',
+            boxShadow: '0 0 6px #ff2a85, 0 0 12px #ff2a85',
+            opacity: '0',
+            pointerEvents: 'none',
+            zIndex: '1',
+            animation: `sparkle-fade ${dur}s ease-in-out forwards`
+        });
+
+        container.appendChild(sparkle);
+
+        setTimeout(() => {
+            sparkle.remove();
+        }, dur * 1000);
+    }, 200);
+}
+
+// Inject sparkle keyframes once
+(function injectSparkleKeyframes() {
+    const style = document.createElement('style');
+    style.textContent = `
+        @keyframes sparkle-fade {
+            0% { opacity: 0; transform: scale(0) translateY(0); }
+            30% { opacity: 1; transform: scale(1.2) translateY(-10px); }
+            70% { opacity: 0.8; transform: scale(1) translateY(-20px); }
+            100% { opacity: 0; transform: scale(0.5) translateY(-30px); }
+        }
+        @keyframes romantic-float-1 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-6px); } }
+        @keyframes romantic-float-2 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-10px); } }
+        @keyframes romantic-float-3 { 0%,100% { transform: translateY(0); } 50% { transform: translateY(-4px); } }
+    `;
+    document.head.appendChild(style);
+})();
+
+// --- Romantic Messages with Typing Effect ---
+function showRomanticMessages() {
+    const container = document.getElementById('romantic-messages');
+    if (!container) return;
+    container.innerHTML = '';
+
+    romanticMessages.forEach((msg, index) => {
+        const pill = document.createElement('div');
+        pill.className = 'message-pill';
+
+        // Vary float animation per pill
+        const floatAnimations = ['romantic-float-1 3.5s ease-in-out infinite', 'romantic-float-2 4s ease-in-out infinite', 'romantic-float-3 3s ease-in-out infinite'];
+        pill.style.animationDelay = (index * 0.2) + 's';
+
+        const textEl = document.createElement('span');
+        textEl.className = 'message-text blink-cursor';
+        textEl.style.fontFamily = '"Dancing Script", cursive';
+        textEl.style.fontSize = '16px';
+        textEl.style.fontWeight = '600';
+        textEl.style.letterSpacing = '0.5px';
+        pill.appendChild(textEl);
+        container.appendChild(pill);
+
+        // Stagger reveal each pill
+        setTimeout(() => {
+            pill.classList.add('show-pill');
+            // Apply floating animation after the pill appears
+            setTimeout(() => {
+                pill.style.animation = floatAnimations[index % floatAnimations.length];
+            }, 1100);
+            // Typing effect
+            typeRomanticText(textEl, msg, 50).then(() => {
+                textEl.classList.remove('blink-cursor');
+            });
+        }, index * 1200);
+    });
+}
+
+function typeRomanticText(el, text, speed) {
+    return new Promise((resolve) => {
+        el.textContent = '';
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                resolve();
+            }
+        }
+        type();
+    });
 }

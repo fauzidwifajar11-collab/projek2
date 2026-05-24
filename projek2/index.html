@@ -35,6 +35,23 @@
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        'neon-pink': '#ff2a85',
+                        'neon-pink-dim': 'rgba(255, 42, 133, 0.4)',
+                        'neon-green': '#00ffcc',
+                    },
+                    fontFamily: {
+                        'elegant': ['"Dancing Script"', 'cursive'],
+                    }
+                }
+            }
+        }
+    </script>
 </head>
 
 <body>
@@ -339,6 +356,29 @@
         <script src="jscp/settings.js"></script>
         <script src="jscp/main.js"></script>
         <script src="jscp/ui.js"></script>
+
+        <!-- Romantic Cyberpunk Ending Page -->
+        <div id="romantic-ending" class="fixed inset-0 z-[9999999] hidden flex flex-col items-center justify-center bg-black transition-opacity duration-1000 opacity-0 pointer-events-none overflow-hidden">
+            <!-- Background atmosphere -->
+            <div class="absolute inset-0 bg-gradient-to-b from-transparent to-[rgba(255,42,133,0.1)] opacity-50"></div>
+            
+            <!-- Green Firework / Flower Glow Container -->
+            <div id="romantic-firework" class="absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2">
+                <div class="glow-core shadow-[0_0_50px_#00ffcc,0_0_100px_#00ffcc] w-4 h-4 rounded-full bg-neon-green"></div>
+                <div id="firework-particles-container"></div>
+            </div>
+
+            <!-- Floating Messages Container -->
+            <div id="romantic-messages" class="absolute bottom-32 w-full flex flex-col items-center gap-4 px-4">
+                <!-- Messages will be injected here via JS -->
+            </div>
+
+            <!-- Close Button -->
+            <button id="btn-close-romantic" class="absolute bottom-10 px-8 py-3 rounded-full border-2 border-neon-pink text-neon-pink font-bold tracking-widest text-sm hover:bg-neon-pink hover:text-white transition-all duration-300 shadow-[0_0_15px_rgba(255,42,133,0.5)] hover:shadow-[0_0_25px_rgba(255,42,133,0.8)] focus:outline-none">
+                CLOSE
+            </button>
+        </div>
+
 </body>
 
 </html>
