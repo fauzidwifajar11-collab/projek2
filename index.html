@@ -28,11 +28,15 @@
     <meta name="twitter:image" content="https://happybirthdaydeargift.vercel.app/image/birthday-gift.jpg">
 
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
-    <link rel="stylesheet" href="css/index.css">
+    <link rel="stylesheet" href="css/index.css?v=4">
+    <link rel="stylesheet" href="css/cyber.css?v=4">
+    <link rel="stylesheet" href="css/game.css?v=1">
+    <link rel="stylesheet" href="css/playlist.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
     <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 </head>
@@ -109,7 +113,7 @@
     <canvas style="position:absolute;width:100%;height:100%;z-index:9999;display:none;" class="canvas"></canvas>
     <div class="overlay">
         <div class="stars-container" id="starsContainer"></div>
-        <img id="gift-image" src="image/iyan & anis.png"
+        <img id="gift-image" src=""
             style="display: none; position: absolute; top: 50%; left: 50%; transform: translate(-50%, -50%); z-index: 10000; max-width: 80%; max-height: 80%;" />
         <div class="content-display" id="contentDisplay">
             <p id="contentText"></p>
@@ -119,7 +123,27 @@
             <div class="book" id="book"></div>
         </div>
 
-        <button class="music-control" id="musicControl" title="Play/Pause Music">
+        <!-- ============================== -->
+        <!-- ROMANTIC CYBER AESTHETIC SECTION -->
+        <!-- ============================== -->
+        <div id="cyber-romantic-section" style="display: none;">
+            <!-- Background gradient & ambient glow -->
+            <div class="cyber-bg-glow"></div>
+            
+            <!-- Scrolling Container -->
+            <div class="cyber-scroll-container" id="cyber-scroll-container">
+                <!-- Javascript will inject scrolling neon pills and photos here -->
+            </div>
+
+            <!-- Fireworks Container -->
+            <canvas id="cyber-fireworks-canvas"></canvas>
+
+            <!-- Close Button (Initially Hidden) -->
+            <button id="cyber-close-btn" class="cyber-close-btn">CLOSE</button>
+        </div>
+        <!-- END ROMANTIC CYBER AESTHETIC SECTION -->
+
+        <button class="music-control" id="musicControl" title="Play/Pause Music" style="display: none;">
             ▶
         </button>
 
@@ -139,7 +163,7 @@
                     <span class="close">×</span>
                 </div>
                 <div class="modal-body">
-                    <div class="settings-section">
+                    <div class="settings-section" style="display: none;">
                         <h3 data-i18n="music">🎵 Pengaturan Suara</h3>
                         <div class="form-group">
                             <label for="backgroundMusic" data-i18n="backgroundMusic">Musik Latar:</label>
@@ -276,8 +300,8 @@
             </div>
         </div>
 
-        <audio id="birthdayAudio" loop>
-            <source src="music/happybirtday_uia.mp3" type="audio/mpeg">
+        <audio id="birthdayAudio" loop muted>
+            <source src="" type="audio/mpeg">
             Your browser does not support the audio element.
         </audio>
 
@@ -336,9 +360,117 @@
         <script src="jscp/api.obf.js"></script>
         <script src="jscp/auth.obf.js"></script>
         <script src="jscp/voucher.obf.js"></script>
-        <script src="jscp/settings.js"></script>
-        <script src="jscp/main.js"></script>
-        <script src="jscp/ui.js"></script>
+        <script src="jscp/settings.js?v=4"></script>
+        <script src="jscp/main.js?v=4"></script>
+        <script src="jscp/ui.js?v=4"></script>
+        <script src="jscp/cyber.js?v=4"></script>
+        <script src="jscp/game.js?v=1"></script>
+        <script src="jscp/playlist.js?v=1"></script>
+
+        <button id="btn-play-game" style="display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); z-index: 1000000; padding: 15px 30px; border-radius: 25px; background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; font-size: 18px; font-weight: bold; border: 2px solid white; box-shadow: 0 0 15px rgba(255,105,180,0.8); cursor: pointer; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Play Anniversary Game! 🎮</button>
+
+        <!-- ============================== -->
+        <!-- ROMANTIC CYBERPUNK ENDING PAGE -->
+        <!-- ============================== -->
+        <div id="romantic-ending">
+            <!-- Vignette overlay -->
+            <div class="romantic-vignette"></div>
+
+            <!-- Ambient pink glow circles -->
+            <div class="romantic-ambient-glow romantic-ambient-glow--1"></div>
+            <div class="romantic-ambient-glow romantic-ambient-glow--2"></div>
+            <div class="romantic-ambient-glow romantic-ambient-glow--3"></div>
+
+            <!-- Sparkle canvas layer -->
+            <canvas id="romantic-sparkle-canvas"></canvas>
+
+            <!-- Center: Green Firework / Flower -->
+            <div id="romantic-firework-center">
+                <div class="romantic-glow-core"></div>
+                <div id="romantic-petals-container"></div>
+            </div>
+
+            <!-- Title text -->
+            <div id="romantic-title"></div>
+
+            <!-- Floating Message Pills -->
+            <div id="romantic-messages-area"></div>
+
+            <!-- Close Button Removed -->
+        </div>
+
+        <!-- ============================== -->
+        <!-- MEMORY MATCH GAME SECTION      -->
+        <!-- ============================== -->
+        <div id="anniversary-game" style="display: none;">
+            <div class="game-overlay"></div>
+            <div class="game-header">
+                <h2>Memory Match ❤️</h2>
+                <div class="game-stats">
+                    <span id="game-moves">Moves: 0</span>
+                    <span id="game-matches">Matches: 0 / 6</span>
+                </div>
+            </div>
+            <div class="game-board-container">
+                <div id="game-board"></div>
+            </div>
+            <div id="game-win-screen" style="display: none;">
+                <h2>You Win! 🎉</h2>
+                <p>Happy Anniversary! I love you so much! ❤️</p>
+                <button id="btn-close-game">Dengarkan Playlistnya 🎵</button>
+            </div>
+        </div>
+
+        <!-- ============================== -->
+        <!-- ANI'S PLAYLIST SECTION         -->
+        <!-- ============================== -->
+        <div id="playlist-page">
+            <div class="playlist-overlay"></div>
+            
+            <div class="playlist-container">
+                <div class="playlist-header">
+                    <h2>Playlistnya 🎧</h2>
+                    <p>Lagu-lagu spesial untuk merayakan cinta kita.</p>
+                </div>
+
+                <div class="music-player">
+                    <div class="album-art">
+                        <div class="record-vinyl"></div>
+                        <img id="current-cover" src="image/logo.png" alt="Album Cover">
+                    </div>
+
+                    <div class="track-info">
+                        <h3 id="current-title">Memuat...</h3>
+                        <p id="current-artist">Memuat artis...</p>
+                    </div>
+
+                    <div class="progress-container" id="progress-container">
+                        <div class="progress-bar" id="progress-bar"></div>
+                    </div>
+                    <div class="time-info">
+                        <span id="current-time">0:00</span>
+                        <span id="duration">0:00</span>
+                    </div>
+
+                    <div class="player-controls">
+                        <button id="btn-prev" class="control-btn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 6h2v12H6zm3.5 6l8.5 6V6z"/></svg></button>
+                        <button id="btn-play" class="control-btn play-btn"><svg id="play-icon" viewBox="0 0 24 24"><path fill="currentColor" d="M8 5v14l11-7z"/></svg><svg id="pause-icon" viewBox="0 0 24 24" style="display:none;"><path fill="currentColor" d="M6 19h4V5H6v14zm8-14v14h4V5h-4z"/></svg></button>
+                        <button id="btn-next" class="control-btn"><svg viewBox="0 0 24 24"><path fill="currentColor" d="M6 18l8.5-6L6 6v12zM16 6v12h2V6h-2z"/></svg></button>
+                    </div>
+                </div>
+
+                <div class="playlist-tracks">
+                    <ul id="track-list">
+                        <!-- Tracks injected by JS -->
+                    </ul>
+                </div>
+                
+                <button id="btn-close-playlist">Kembali</button>
+            </div>
+            
+            <!-- Hidden Audio Element -->
+            <audio id="playlist-audio"></audio>
+        </div>
 </body>
 
 </html>

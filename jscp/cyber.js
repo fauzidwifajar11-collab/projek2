@@ -12,19 +12,19 @@ class CyberRomanticSection {
         this.closeBtn = document.getElementById('cyber-close-btn');
         this.fwCanvas = document.getElementById('cyber-fireworks-canvas');
         this.fwCtx = this.fwCanvas.getContext('2d');
-        
+
         this.fireworks = [];
         this.particles = [];
         this.isFireworksActive = false;
         this.fireworksLoopInterval = null;
 
         this.messages = [
-            "Happy Anniversary, my love... makin kesini makin sayang sama kamu ❤️",
+            "Happy Anniversary, my love... thankyou for everything ❤️",
             "Another year with you. Still my best decision ✨",
             "Loving you never gets old.",
             "Terima kasih sudah ada. You mean everything. ✨",
-            "My favorite person. Sekarang dan seterusnya.",
-            "Kamu, selalu kamu ❤️",
+            "My favorite person . Sekarang dan seterusnya.",
+            "Kamu, maybe in another life ❤️",
             "I love you so much!",
             "Semoga kita selalu bahagia bersama-sama.",
             "My one and only 💖"
@@ -46,7 +46,7 @@ class CyberRomanticSection {
         ];
 
         this.totalItems = 30; // Total floating items to spawn
-        
+
         this.init();
     }
 
@@ -80,11 +80,11 @@ class CyberRomanticSection {
 
         // Generate floating items over time
         let maxDelay = 0;
-        
+
         for (let i = 0; i < this.totalItems; i++) {
             const delay = Math.random() * 15000; // Spread over 15 seconds
             const duration = 6000 + Math.random() * 6000; // 6 to 12 seconds float time
-            
+
             if (delay + duration > maxDelay) {
                 maxDelay = delay + duration;
             }
@@ -104,14 +104,14 @@ class CyberRomanticSection {
         const item = document.createElement('div');
         item.className = 'cyber-floating-item cyber-float-up';
         item.style.setProperty('--duration', `${durationMs}ms`);
-        
-        // Random X position between 10% and 90% of screen
-        const startX = 10 + Math.random() * 80;
-        item.style.left = `${startX}%`;
-        
-        // Slightly random scale
+
+        // Center items instead of overflowing right edge
+        item.style.left = `50%`;
+        item.style.transform = `translateX(-50%)`;
+
+        // Slightly random scale with centering
         const scale = 0.8 + Math.random() * 0.4;
-        item.style.transform = `scale(${scale})`;
+        item.style.transform = `translateX(-50%) scale(${scale})`;
 
         // Randomly choose text or photo (80% text, 20% photo)
         const isPhoto = Math.random() > 0.8 && this.photos.length > 0;
@@ -169,12 +169,12 @@ class CyberRomanticSection {
 
     launchFirework() {
         if (!this.isFireworksActive) return;
-        
+
         const startX = this.fwCanvas.width * 0.2 + Math.random() * (this.fwCanvas.width * 0.6);
         const startY = this.fwCanvas.height;
         const targetX = startX + (Math.random() - 0.5) * 200;
         const targetY = this.fwCanvas.height * 0.1 + Math.random() * (this.fwCanvas.height * 0.4);
-        
+
         this.fireworks.push({
             x: startX,
             y: startY,
@@ -219,7 +219,7 @@ class CyberRomanticSection {
             const dx = fw.tx - fw.x;
             const dy = fw.ty - fw.y;
             const dist = Math.sqrt(dx * dx + dy * dy);
-            
+
             if (dist < fw.speed) {
                 // Explode
                 this.explodeFirework(fw.tx, fw.ty, fw.color);
@@ -236,7 +236,7 @@ class CyberRomanticSection {
             this.fwCtx.arc(fw.x, fw.y, 2, 0, Math.PI * 2);
             this.fwCtx.fillStyle = fw.color;
             this.fwCtx.fill();
-            
+
             // Rocket trail particle
             if (Math.random() > 0.2) {
                 this.particles.push({
@@ -276,25 +276,22 @@ class CyberRomanticSection {
     stopSequence() {
         this.isFireworksActive = false;
         clearInterval(this.fireworksLoopInterval);
-        
+
         // Hide UI immediately
         this.section.style.opacity = '0';
         this.section.style.transition = 'opacity 1s ease';
-        
+
         setTimeout(() => {
             this.section.style.display = 'none';
             this.section.style.opacity = '1';
             this.scrollContainer.innerHTML = '';
             this.fwCtx.clearRect(0, 0, this.fwCanvas.width, this.fwCanvas.height);
-            
-            // Trigger love page (heart photos)
-            if (typeof showLovePage === 'function') {
-                showLovePage();
-            } else if (typeof spawnHeartPhotosCentered === 'function') {
+
+            // Trigger the love photo page after closing
+            if (typeof spawnHeartPhotosCentered === 'function') {
                 spawnHeartPhotosCentered();
             }
         }, 1000);
-
     }
 }
 

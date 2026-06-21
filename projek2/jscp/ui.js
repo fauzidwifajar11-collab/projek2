@@ -940,12 +940,11 @@ function showBook() {
             requestAnimationFrame(() => {
                 book.style.opacity = '1';
                 book.style.transform = 'scale(1) translateY(0)';
-                // Delay music toggle
-                setTimeout(() => {
-                    if (!isPlaying) {
-                        toggleMusic();
-                    }
-                }, 800);
+                // setTimeout(() => {
+                //     if (!isPlaying) {
+                //         toggleMusic();
+                //     }
+                // }, 800);
             });
         });
     }
@@ -1109,11 +1108,40 @@ function spawnHeartPhotosCentered() {
             setTimeout(() => {
                 requestAnimationFrame(spawnNext);
             }, 80); // Giảm từ 100ms xuống 80ms
+        } else {
+            // Auto start the game after enjoying photos
+            setTimeout(() => {
+                const btnPlay = document.getElementById('btn-play-game');
+                if (btnPlay) {
+                    btnPlay.style.display = 'none';
+                }
+                const photos = document.querySelectorAll('.photo');
+                photos.forEach(p => p.style.opacity = '0');
+                if (typeof anniversaryGame !== 'undefined' && anniversaryGame) {
+                    anniversaryGame.init();
+                }
+            }, 3500);
         }
     }
 
     spawnNext();
 }
+
+function showLovePage() {
+    // Hide any overlapping elements just in case
+    const contentDisplay = document.getElementById('contentDisplay');
+    if (contentDisplay) {
+        contentDisplay.classList.remove('show');
+    }
+
+    // Trigger effects and photos
+    requestAnimationFrame(() => {
+        setTimeout(() => showConfetti(), 100);
+        setTimeout(() => showFirework(), 200);
+        spawnHeartPhotosCentered();
+    });
+}
+
 
 
 // 7. Tối ưu hóa startHeartEffect
@@ -1166,21 +1194,25 @@ function checkBookFinished() {
             if (contentDisplay) {
                 contentDisplay.classList.remove('show');
             }
-            setTimeout(() => {
-                const currentSettings = window.settings || settings;
-                if (currentSettings.enableHeart) {
-                    startHeartEffect();
-                    // Show romantic ending after heart effect finishes
-                    setTimeout(() => {
-                        if(window.cyberRomantic) window.cyberRomantic.startSequence();
-                        else showRomanticEnding();
-                    }, 4000);
-                } else {
-                    // Show romantic ending directly
-                    if(window.cyberRomantic) window.cyberRomantic.startSequence();
-                    else showRomanticEnding();
-                }
-            }, 1000);
+            
+            // Hide the book
+            const book = document.getElementById('book');
+            const bookContainer = document.querySelector('.book-container');
+            if (book) {
+                book.style.display = 'none';
+                book.classList.remove('show');
+            }
+            if (bookContainer) {
+                bookContainer.style.display = 'none';
+                bookContainer.classList.remove('show');
+            }
+
+            // Go directly to romantic ending
+            if(window.cyberRomantic) {
+                window.cyberRomantic.startSequence();
+            } else if (typeof showRomanticEnding === 'function') {
+                showRomanticEnding();
+            }
         }
     }
 }
@@ -1435,24 +1467,31 @@ book.addEventListener('contextmenu', (e) => {
     e.preventDefault();
 });
 
+// Music controls removed per request
+/*
 const musicControl = document.getElementById('musicControl');
 const birthdayAudio = document.getElementById('birthdayAudio');
 let isPlaying = false;
 
-birthdayAudio.volume = 0.6;
+if (birthdayAudio) birthdayAudio.volume = 0.6;
 
 function toggleMusic() {
+    if (!birthdayAudio) return;
     if (isPlaying) {
         birthdayAudio.pause();
-        musicControl.innerHTML = '▶';
-        musicControl.classList.remove('playing');
-        musicControl.title = 'Play Music';
+        if(musicControl) {
+            musicControl.innerHTML = '▶';
+            musicControl.classList.remove('playing');
+            musicControl.title = 'Play Music';
+        }
         isPlaying = false;
     } else {
         birthdayAudio.play().then(() => {
-            musicControl.innerHTML = '⏸';
-            musicControl.classList.add('playing');
-            musicControl.title = 'Pause Music';
+            if(musicControl) {
+                musicControl.innerHTML = '⏸';
+                musicControl.classList.add('playing');
+                musicControl.title = 'Pause Music';
+            }
             isPlaying = true;
         }).catch(error => {
             // alert('Click to play music!');
@@ -1460,20 +1499,23 @@ function toggleMusic() {
     }
 }
 
-musicControl.addEventListener('click', toggleMusic);
+if(musicControl) musicControl.addEventListener('click', toggleMusic);
 
-birthdayAudio.addEventListener('ended', () => {
-});
+if(birthdayAudio) {
+    birthdayAudio.addEventListener('ended', () => {
+    });
 
-birthdayAudio.addEventListener('error', (e) => {
-    musicControl.style.display = 'none';
-});
+    birthdayAudio.addEventListener('error', (e) => {
+        if(musicControl) musicControl.style.display = 'none';
+    });
+}
 
 document.addEventListener('visibilitychange', () => {
-    if (document.hidden && isPlaying) {
+    if (document.hidden && isPlaying && birthdayAudio) {
         birthdayAudio.pause();
     }
 });
+*/
 
 // 8. Tối ưu hóa stars creation
 let starsCreated = false;

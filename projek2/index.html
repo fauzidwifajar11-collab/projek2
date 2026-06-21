@@ -30,11 +30,14 @@
     <link rel="icon" type="image/x-icon" href="https://cdn.jsdelivr.net/gh/sun0225SUN/photos/img/20210715233345.png">
     <link rel="stylesheet" href="css/index.css?v=2">
     <link rel="stylesheet" href="css/cyber.css?v=2">
+    <link rel="stylesheet" href="css/game.css?v=1">
     <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
     <link href="https://fonts.googleapis.com/css?family=Pacifico&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap" rel="stylesheet">
-    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Dancing+Script:wght@400;500;600;700&display=swap"
+        rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Quicksand:wght@300;400;500;600;700&display=swap"
+        rel="stylesheet">
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-app.js"></script>
     <script src="https://www.gstatic.com/firebasejs/8.10.1/firebase-auth.js"></script>
 </head>
@@ -127,7 +130,7 @@
         <div id="cyber-romantic-section" style="display: none;">
             <!-- Background gradient & ambient glow -->
             <div class="cyber-bg-glow"></div>
-            
+
             <!-- Scrolling Container -->
             <div class="cyber-scroll-container" id="cyber-scroll-container">
                 <!-- Javascript will inject scrolling neon pills and photos here -->
@@ -141,9 +144,6 @@
         </div>
         <!-- END ROMANTIC CYBER AESTHETIC SECTION -->
 
-        <button class="music-control" id="musicControl" title="Play/Pause Music">
-            ▶
-        </button>
 
         <button class="settings-button" id="settingsButton" title="Settings" style="display: none;">
             ⚙
@@ -151,7 +151,8 @@
 
         <!-- Settings hint element -->
         <div id="settingsHint" class="settings-hint">
-            <div class="hint-text" data-i18n="settingsHint" style="display: none;">klik di sini untuk mengatur sesuai keinginan</div>
+            <div class="hint-text" data-i18n="settingsHint" style="display: none;">klik di sini untuk mengatur sesuai
+                keinginan</div>
         </div>
 
         <div id="settingsModal" class="modal">
@@ -169,9 +170,11 @@
                                 <select id="backgroundMusic">
                                     <option value="" disabled selected>Memuat daftar musik...</option>
                                 </select>
-                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Coba dengarkan</button>
+                                <button type="button" id="musicPreviewButton" class="music-preview-btn">▶ Coba
+                                    dengarkan</button>
                             </div>
-                            <span id="musicPreviewStatus" class="music-preview-status">Pilih musik lalu klik "Coba dengarkan"</span>
+                            <span id="musicPreviewStatus" class="music-preview-status">Pilih musik lalu klik "Coba
+                                dengarkan"</span>
                         </div>
                     </div>
 
@@ -275,7 +278,8 @@
                     <div class="form-group">
                         <label for="isSave" data-i18n="isSave">Simpan QR permanen:</label>
                         <input type="checkbox" id="isSave" style="margin-left: 10px;">
-                        <span style="margin-left: 5px; font-size: 12px; color: #666;" data-i18n="saveForeverPrice">(Tambah 20.000 Rp)</span>
+                        <span style="margin-left: 5px; font-size: 12px; color: #666;"
+                            data-i18n="saveForeverPrice">(Tambah 20.000 Rp)</span>
                     </div>
                     <div class="settings-p"
                         style="margin-bottom: 12px; background: #fff8e1; color: #b26a00; border-radius: 7px; padding: 10px 14px; font-size: 15px; box-shadow: 0 1px 6px rgba(0,0,0,0.04);">
@@ -284,24 +288,23 @@
                         </div>
                         <div data-i18n="followNote" class="settings-p">
                             🥰 Silakan <a href="https://www.tiktok.com/@iamtritoan?is_from_webapp=1&sender_device=pc"
-                                target="_blank" style="color:#ff0050;font-weight:bold;text-decoration:underline;">ikuti saya</a> untuk update website terbaru dan tercepat!
+                                target="_blank" style="color:#ff0050;font-weight:bold;text-decoration:underline;">ikuti
+                                saya</a> untuk update website terbaru dan tercepat!
                         </div>
                         <div class="settings-p" data-i18n="notVietnamWarning">
-                            ⚠️ Jika Anda bukan dari Vietnam, Anda tidak bisa membayar lewat website ini, silakan hubungi via TikTok
+                            ⚠️ Jika Anda bukan dari Vietnam, Anda tidak bisa membayar lewat website ini, silakan hubungi
+                            via TikTok
                             <a href="https://www.tiktok.com/@iamtritoan?is_from_webapp=1&sender_device=pc"
                                 target="_blank" style="color:#ff0050;font-weight:bold;text-decoration:underline;">
                                 @iamtritoan</a> untuk bantuan pembayaran produk ini.
                         </div>
                     </div>
-                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Terapkan Pengaturan</button>
+                    <button id="applySettings" class="apply-settings-btn" data-i18n="apply">🎉 Terapkan
+                        Pengaturan</button>
                 </div>
             </div>
         </div>
 
-        <audio id="birthdayAudio" loop>
-            <source src="music/happybirtday_uia.mp3" type="audio/mpeg">
-            Your browser does not support the audio element.
-        </audio>
 
         <div id="orientation-lock">
             <div class="phone-icon">
@@ -362,6 +365,9 @@
         <script src="jscp/main.js?v=2"></script>
         <script src="jscp/ui.js?v=2"></script>
         <script src="jscp/cyber.js?v=2"></script>
+        <script src="jscp/game.js?v=1"></script>
+
+        <button id="btn-play-game" style="display: none; position: fixed; bottom: 100px; left: 50%; transform: translateX(-50%); z-index: 1000000; padding: 15px 30px; border-radius: 25px; background: linear-gradient(45deg, #ff69b4, #ff1493); color: white; font-size: 18px; font-weight: bold; border: 2px solid white; box-shadow: 0 0 15px rgba(255,105,180,0.8); cursor: pointer; text-shadow: 1px 1px 2px rgba(0,0,0,0.5);">Play Anniversary Game! 🎮</button>
 
         <!-- ============================== -->
         <!-- ROMANTIC CYBERPUNK ENDING PAGE -->
@@ -392,6 +398,28 @@
 
             <!-- Close Button -->
             <button id="btn-close-romantic">CLOSE</button>
+        </div>
+
+        <!-- ============================== -->
+        <!-- MEMORY MATCH GAME SECTION      -->
+        <!-- ============================== -->
+        <div id="anniversary-game" style="display: none;">
+            <div class="game-overlay"></div>
+            <div class="game-header">
+                <h2>Memory Match ❤️</h2>
+                <div class="game-stats">
+                    <span id="game-moves">Moves: 0</span>
+                    <span id="game-matches">Matches: 0 / 8</span>
+                </div>
+            </div>
+            <div class="game-board-container">
+                <div id="game-board"></div>
+            </div>
+            <div id="game-win-screen" style="display: none;">
+                <h2>You Win! 🎉</h2>
+                <p>Happy Anniversary! I love you so much! ❤️</p>
+                <button id="btn-close-game">Close</button>
+            </div>
         </div>
 
 </body>

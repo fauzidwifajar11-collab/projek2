@@ -1,4 +1,5 @@
-﻿
+
+
 let isLandscape = false;
 let matrixInterval = null;
 const confettiPool = [];
@@ -441,7 +442,6 @@ S.UI = (function () {
 
                 case 'gift':
                     const canvas = document.querySelector('.canvas');
-                    const giftImage = document.getElementById('gift-image');
                     const matrixCanvas = document.getElementById('matrix-rain');
 
                     showStars();
@@ -450,40 +450,18 @@ S.UI = (function () {
                     const currentSettings = window.settings || settings;
 
                     if (currentSettings.enableBook === true) {
-                        if (canvas && giftImage && matrixCanvas) {
+                        if (canvas && matrixCanvas) {
                             canvas.style.display = 'none';
                             matrixCanvas.style.display = 'none';
-
-                            if (giftImage.src && giftImage.src !== window.location.href && giftImage.src !== '' && !giftImage.src.includes('undefined')) {
-                                giftImage.style.display = 'block';
-                                giftImage.style.animation = 'giftCelebration 2s ease-in-out';
-                                setTimeout(() => {
-                                    giftImage.style.display = 'none';
-                                    showBook();
-                                }, 3000);
-                            } else {
-                                showBook();
-                            }
-                        } else {
-                            showBook();
                         }
+                        showBook();
                     } else {
                         if (canvas && matrixCanvas) {
                             canvas.style.display = 'none';
                             matrixCanvas.style.display = 'none';
                         }
-                        if (giftImage && giftImage.src && giftImage.src !== window.location.href && giftImage.src !== '' && !giftImage.src.includes('undefined')) {
-                            giftImage.style.display = 'block';
-                            giftImage.style.animation = 'giftCelebration 2s ease-in-out';
-                            if (currentSettings.enableHeart === true) {
-                                setTimeout(() => {
-                                    startHeartEffect();
-                                }, 2000);
-                            }
-                        } else {
-                            if (currentSettings.enableHeart === true) {
-                                startHeartEffect();
-                            }
+                        if (currentSettings.enableHeart === true) {
+                            startHeartEffect();
                         }
                     }
                     break;
@@ -947,6 +925,11 @@ function showBook() {
         bookContainer.classList.add('show');
         book.style.display = 'block';
 
+        const playlistPage = document.getElementById('playlist-page');
+        if (playlistPage) {
+            playlistPage.style.display = 'block';
+        }
+
         // ✅ FIX: Tính toán z-index cho tất cả pages
         calculatePageZIndexes();
         
@@ -990,7 +973,7 @@ let currentPage = 0;
 let isFlipping = false;
 let typewriterTimeout;
 let isBookFinished = false;
-let photoUrls = pages.filter(page => page.image).map(page => page.image);
+let photoUrls = pages.filter(page => page.image && !page.image.includes('theend.jpg')).map(page => page.image);
 
 function showConfetti() {
     const confettiColors = ['#ff6f91', '#ff9671', '#ffc75f', '#f9f871', '#ff3c78'];
@@ -1131,6 +1114,19 @@ function spawnHeartPhotosCentered() {
             setTimeout(() => {
                 requestAnimationFrame(spawnNext);
             }, 80); // Giảm từ 100ms xuống 80ms
+        } else {
+            // Auto start the game after enjoying photos
+            setTimeout(() => {
+                const btnPlay = document.getElementById('btn-play-game');
+                if (btnPlay) {
+                    btnPlay.style.display = 'none';
+                }
+                const photos = document.querySelectorAll('.photo');
+                photos.forEach(p => p.style.opacity = '0');
+                if (typeof anniversaryGame !== 'undefined' && anniversaryGame) {
+                    anniversaryGame.init();
+                }
+            }, 3500);
         }
     }
 
@@ -1173,9 +1169,7 @@ function startHeartEffect() {
             showFirework();
         }, 200);
 
-        setTimeout(() => {
-            spawnHeartPhotosCentered();
-        }, 300);
+        // removed spawnHeartPhotosCentered
     });
 }
 
@@ -1194,6 +1188,15 @@ function checkBookFinished() {
                 const currentSettings = window.settings || settings;
                 if (currentSettings.enableHeart) {
                     startHeartEffect();
+                    // Show romantic ending after heart effect finishes
+                    setTimeout(() => {
+                        if(window.cyberRomantic) window.cyberRomantic.startSequence();
+                        else showRomanticEnding();
+                    }, 4000);
+                } else {
+                    // Show romantic ending directly
+                    if(window.cyberRomantic) window.cyberRomantic.startSequence();
+                    else showRomanticEnding();
                 }
             }, 1000);
         }
@@ -1685,4 +1688,250 @@ if (book) {
     book.addEventListener('touchstart', forcePlayMusic, { passive: true, once: true });
     book.addEventListener('mousedown', forcePlayMusic, { once: true });
     book.addEventListener('click', forcePlayMusic, { once: true });
+}
+
+// =============================================
+// ROMANTIC CYBERPUNK ENDING PAGE
+// =============================================
+
+const romanticMessages = [
+    "if yes, click me",
+    "Happy Anniversary my love",
+    "makasih masih ada",
+    "another year with you",
+    "you make me better"
+];
+
+function showRomanticEnding() {
+    const romanticEl = document.getElementById('romantic-ending');
+    if (!romanticEl) return;
+
+    // Show the container
+    romanticEl.classList.add('active');
+
+    // Hide book and other elements
+    const bookContainer = document.querySelector('.book-container');
+    const book = document.getElementById('book');
+    if (bookContainer) bookContainer.style.display = 'none';
+    if (book) book.style.display = 'none';
+    
+    const settingsBtn = document.getElementById('settingsButton');
+    if (settingsBtn) settingsBtn.style.display = 'none';
+    const musicControl = document.getElementById('musicControl');
+    if (musicControl) musicControl.style.display = 'none';
+
+    // Set title
+    const title = document.getElementById('romantic-title');
+    if (title) {
+        title.textContent = "Happy Anniversary";
+        setTimeout(() => title.classList.add('show'), 1500);
+    }
+
+    // Start sparkle canvas
+    startSparkleCanvas();
+
+    // Start green firework explosion sequence
+    setTimeout(() => {
+        launchGreenFirework();
+    }, 600);
+
+    // Show messages with stagger
+    setTimeout(() => {
+        showRomanticMessages();
+    }, 3500);
+
+    // Show close button
+    setTimeout(() => {
+        const closeBtn = document.getElementById('btn-close-romantic');
+        if (closeBtn) {
+            closeBtn.classList.add('visible');
+            closeBtn.addEventListener('click', closeRomanticEnding, { once: true });
+        }
+    }, 9000);
+}
+
+function closeRomanticEnding() {
+    const romanticEl = document.getElementById('romantic-ending');
+    if (!romanticEl) return;
+
+    romanticEl.classList.remove('active');
+    
+    // Stop animations
+    if (window.romanticSparkleCtx) {
+        cancelAnimationFrame(window.romanticSparkleAnim);
+    }
+
+    setTimeout(() => {
+        // Clean up particles
+        const fwParticles = document.getElementById('romantic-petals-container');
+        if (fwParticles) fwParticles.innerHTML = '';
+        const msgContainer = document.getElementById('romantic-messages-area');
+        if (msgContainer) msgContainer.innerHTML = '';
+        const title = document.getElementById('romantic-title');
+        if (title) title.classList.remove('show');
+        const closeBtn = document.getElementById('btn-close-romantic');
+        if (closeBtn) closeBtn.classList.remove('visible');
+    }, 1500);
+}
+
+// --- Sparkle Canvas ---
+function startSparkleCanvas() {
+    const canvas = document.getElementById('romantic-sparkle-canvas');
+    if (!canvas) return;
+    
+    const ctx = canvas.getContext('2d');
+    window.romanticSparkleCtx = ctx;
+    
+    canvas.width = window.innerWidth;
+    canvas.height = window.innerHeight;
+    
+    const particles = [];
+    const numParticles = Math.floor(window.innerWidth / 10);
+    
+    for (let i = 0; i < numParticles; i++) {
+        particles.push({
+            x: Math.random() * canvas.width,
+            y: Math.random() * canvas.height,
+            r: Math.random() * 2 + 0.5,
+            d: Math.random() * numParticles,
+            color: `rgba(255, 42, 133, ${Math.random() * 0.5 + 0.2})`,
+            vx: Math.random() * 0.4 - 0.2,
+            vy: Math.random() * -0.6 - 0.2
+        });
+    }
+    
+    function draw() {
+        if (!document.getElementById('romantic-ending').classList.contains('active')) return;
+        
+        ctx.clearRect(0, 0, canvas.width, canvas.height);
+        for (let i = 0; i < particles.length; i++) {
+            const p = particles[i];
+            ctx.beginPath();
+            ctx.fillStyle = p.color;
+            ctx.shadowBlur = 10;
+            ctx.shadowColor = '#ff2a85';
+            ctx.arc(p.x, p.y, p.r, 0, Math.PI * 2, true);
+            ctx.fill();
+            
+            p.x += p.vx;
+            p.y += p.vy;
+            
+            if (p.y < -10) {
+                p.y = canvas.height + 10;
+                p.x = Math.random() * canvas.width;
+            }
+            if (p.x < -10) p.x = canvas.width + 10;
+            if (p.x > canvas.width + 10) p.x = -10;
+        }
+        window.romanticSparkleAnim = requestAnimationFrame(draw);
+    }
+    draw();
+    
+    window.addEventListener('resize', () => {
+        if (document.getElementById('romantic-ending').classList.contains('active')) {
+            canvas.width = window.innerWidth;
+            canvas.height = window.innerHeight;
+        }
+    });
+}
+
+// --- Green Firework / Flower Explosion ---
+function launchGreenFirework() {
+    const container = document.getElementById('romantic-petals-container');
+    if (!container) return;
+    container.innerHTML = '';
+
+    const createPetalWave = (num, radius, type, delay) => {
+        setTimeout(() => {
+            for (let i = 0; i < num; i++) {
+                const petal = document.createElement('div');
+                petal.className = `romantic-petal ${type}`;
+
+                const angle = (i / num) * 360 + (Math.random() * 10 - 5);
+                const rad = (angle * Math.PI) / 180;
+                const tx = Math.cos(rad) * radius;
+                const ty = Math.sin(rad) * radius;
+                const animDelay = Math.random() * 0.4;
+
+                container.appendChild(petal);
+
+                requestAnimationFrame(() => {
+                    petal.style.transition = `all 1.8s cubic-bezier(0.16, 1, 0.3, 1) ${animDelay}s`;
+                    petal.style.opacity = '1';
+                    petal.style.transform = `translate(${tx}px, ${ty}px) scale(1)`;
+                });
+
+                setTimeout(() => {
+                    petal.style.transition = 'opacity 3s ease-out, transform 4s linear';
+                    petal.style.opacity = '0';
+                    petal.style.transform = `translate(${tx * 1.5}px, ${ty * 1.5}px) scale(0.5)`;
+                }, 2000 + animDelay * 1000);
+            }
+        }, delay);
+    };
+
+    const br = Math.min(window.innerWidth, window.innerHeight) * 0.35;
+    createPetalWave(32, br, '', 800);
+    createPetalWave(24, br * 0.6, 'romantic-petal--secondary', 1200);
+    createPetalWave(16, br * 0.3, 'romantic-petal--tertiary', 1600);
+}
+
+
+// --- Romantic Messages with Typing Effect ---
+function showRomanticMessages() {
+    const container = document.getElementById('romantic-messages-area');
+    if (!container) return;
+    container.innerHTML = '';
+
+    romanticMessages.forEach((msg, index) => {
+        const pill = document.createElement('div');
+        pill.className = 'romantic-pill';
+        
+        // Random float properties
+        const floatDur = 3 + Math.random() * 2;
+        const floatDelay = Math.random() * 2;
+        const floatDist = -5 - Math.random() * 8;
+        
+        pill.style.setProperty('--float-dur', `${floatDur}s`);
+        pill.style.setProperty('--float-delay', `${floatDelay}s`);
+        pill.style.setProperty('--float-dist', `${floatDist}px`);
+
+        const textEl = document.createElement('span');
+        textEl.className = 'romantic-pill-text typing';
+        
+        pill.appendChild(textEl);
+        container.appendChild(pill);
+
+        // Stagger reveal each pill
+        setTimeout(() => {
+            pill.classList.add('visible');
+            
+            setTimeout(() => {
+                pill.classList.add('floating');
+            }, 800);
+            
+            typeRomanticText(textEl, msg, 50).then(() => {
+                setTimeout(() => {
+                    textEl.classList.remove('typing');
+                }, 1000); // keep cursor blinking for a bit
+            });
+        }, index * 1000);
+    });
+}
+
+function typeRomanticText(el, text, speed) {
+    return new Promise((resolve) => {
+        el.textContent = '';
+        let i = 0;
+        function type() {
+            if (i < text.length) {
+                el.textContent += text.charAt(i);
+                i++;
+                setTimeout(type, speed);
+            } else {
+                resolve();
+            }
+        }
+        type();
+    });
 }

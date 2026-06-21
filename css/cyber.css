@@ -21,7 +21,6 @@
     left: 0;
     width: 100%;
     height: 100%;
-    background: radial-gradient(circle at 50% 50%, rgba(255, 20, 147, 0.1) 0%, transparent 60%);
     pointer-events: none;
     z-index: 1;
 }
@@ -56,7 +55,7 @@
 
 /* The neon pill message */
 .cyber-neon-pill {
-    background: rgba(255, 105, 180, 0.1);
+    background: rgba(255, 105, 180, 0.2);
     border: 2px solid rgba(255, 105, 180, 0.8);
     backdrop-filter: blur(8px);
     -webkit-backdrop-filter: blur(8px);
@@ -66,8 +65,11 @@
     color: #fff;
     font-size: 1.2rem;
     text-shadow: 0 0 8px rgba(255, 255, 255, 0.8);
-    white-space: nowrap;
+    white-space: normal;
     text-align: center;
+    max-width: 85vw;
+    word-wrap: break-word;
+    line-height: 1.4;
 }
 
 /* Glowing Photo */

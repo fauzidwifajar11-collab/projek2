@@ -11,31 +11,23 @@ let settings = {
     matrixColor2: '#ff1493', // Màu pink mẫu
     sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
     sequenceColor: '#ff69b4', // Màu pink mẫu
-    gift: './image/iyan & anis.png',
+    gift: './image/WhatsApp Image 2026-05-28 at 17.22.20.jpeg',
     enableBook: true,
     pages: [
-        // --- Lembar 1 (data-page="0") ---
-        { 
-            image: './image/theend.jpg', // Menggantikan bolsw2.png (Index 0)
-        },
-        { 
-            image: './image/photos/b1.png', // Menggantikan lhvuck.png (Index 1)
-        },
-
-        // --- Lembar 2 (data-page="1") ---
-        { 
-            image: './image/photos/b2.png', // Menggantikan fjr3qh.png (Index 2)
-            content: 'Happy Anniversary Sayang 💗' 
-        },
-        { 
-            image: './image/photos/b3.png', // Menggantikan 8u5tf7.png (Index 3)
-        },
-
-        // --- Lembar 3 (data-page="2") ---
-        { 
-            image: './image/theend.jpg', // Menggantikan tbutvj.png (Index 4)
-            content: 'As long as you’re smiling, I’m happy. Stay happy, my love.' 
-        }
+        { image: './image/screen.png' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.20.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.21.jpeg', content: 'Happy Anniversary Sayang 💗' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.22.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.23.jpeg', content: 'As long as you’re smiling, I’m happy. Stay happy, my love.' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.24.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.25.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.26.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.27.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.28.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.29.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.30.jpeg' },
+        { image: './image/WhatsApp Image 2026-05-28 at 17.22.31.jpeg' },
+        { image: './image/theend.jpg' }
     ],
     enableBook: true,
     enableHeart: true,
@@ -351,34 +343,26 @@ function initializeDefaultSettings() {
         matrixColor2: '#ff1493', // Màu pink mẫu
         sequence: 'HAPPY|ANNIVERSARY|IYAN & ANIS|❤',
         sequenceColor: '#ff69b4', // Màu pink mẫu
-        gift: './image/iyan & anis.png',
+        gift: './image/WhatsApp Image 2026-05-28 at 17.22.20.jpeg',
         enableBook: true,
         enableHeart: true,
         isSave: false,  
         colorTheme: 'pink',
         pages: [
-            // --- Lembar 1 (data-page="0") ---
-            { 
-                image: './image/theend.jpg', // Menggantikan bolsw2.png (Index 0)
-            },
-            { 
-                image: './image/photos/b1.png', // Menggantikan lhvuck.png (Index 1)
-            },
-
-            // --- Lembar 2 (data-page="1") ---
-            { 
-                image: './image/photos/b2.png', // Menggantikan fjr3qh.png (Index 2)
-                content: 'Happy Anniversary Sayang 💗' 
-            },
-            { 
-                image: './image/photos/b3.png', // Menggantikan 8u5tf7.png (Index 3)
-            },
-
-            // --- Lembar 3 (data-page="2") ---
-            { 
-                image: './image/photos/b5.png', // Menggantikan tbutvj.png (Index 4)
-                content: 'As long as you’re smiling, I’m happy. Stay happy, my love.' 
-            }
+            { image: './image/screen.png' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.20.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.21.jpeg', content: 'Happy Anniversary Sayang 💗' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.22.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.23.jpeg', content: 'As long as you’re smiling, I’m happy. Stay happy, my love.' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.24.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.25.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.26.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.27.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.28.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.29.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.30.jpeg' },
+            { image: './image/WhatsApp Image 2026-05-28 at 17.22.31.jpeg' },
+            { image: './image/theend.jpg' }
         ]
     };
 
