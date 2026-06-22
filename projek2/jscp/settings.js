@@ -4,7 +4,7 @@ const closeModal = document.querySelector('.close');
 let pages = [];
 const applySettingsButton = document.getElementById('applySettings');
 let settings = {
-    music: 'music/hbdmusic1.mp3',
+    music: './music/heaven.mp3',
     countdown: 3,
     matrixText: 'HAPPYANNIVERSARY',
     matrixColor1: '#ff69b4', // Màu pink mẫu
@@ -38,6 +38,7 @@ let settings = {
 window.lastIsSaveState = false;
 
 const musicOptions = [
+    { value: './music/heaven.mp3', label: 'Heaven' },
     { value: './music/happy-birthday.mp3', label: 'Happy Anniversary (Gratis)' },
     { value: './music/happybirthday.mp3', label: 'Happy Anniversary (Versi 2)' },
     { value: './music/happybirthday_domixi.mp3', label: 'Happy Anniversary (Độ Mixi)' },
@@ -336,7 +337,7 @@ function resetWebsiteState() {
 function initializeDefaultSettings() {
 
     window.settings = {
-        music: './music/hbdmusic1.mp3',
+        music: './music/heaven.mp3',
         countdown: 3,
         matrixText: 'HAPPYANNIVERSARY',
         matrixColor1: '#ff69b4', // Màu pink mẫu
