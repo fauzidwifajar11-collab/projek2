@@ -31,6 +31,13 @@ class PlaylistManager {
         // Tracks for Iyan & Anis's Playlist
         this.tracks = [
             {
+                title: 'Heaven',
+                artist: 'Bryan Adams — Iyan dan Anis ❤️',
+                src: './music/heaven.mp3',
+                cover: './image/WhatsApp Image 2026-05-28 at 17.22.24.jpeg',
+                duration: '4:03'
+            },
+            {
                 title: 'Menua Bersama',
                 artist: 'Anggis Devaki — Iyan dan Anis ❤️',
                 src: './music/menua_bersama.mp3',
@@ -57,13 +64,6 @@ class PlaylistManager {
                 src: './music/Westlife - My Love (Lyrics) (128).mp3',
                 cover: './image/WhatsApp Image 2026-05-28 at 17.22.23.jpeg',
                 duration: '3:53'
-            },
-            {
-                title: 'Heaven',
-                artist: 'Bryan Adams — Iyan dan Anis ❤️',
-                src: './music/Bryan Adams - Heaven (Classic Version).mp4',
-                cover: './image/WhatsApp Image 2026-05-28 at 17.22.24.jpeg',
-                duration: '4:03'
             }
         ];
     }
