@@ -105,12 +105,12 @@ class CyberRomanticSection {
         item.className = 'cyber-floating-item cyber-float-up';
         item.style.setProperty('--duration', `${durationMs}ms`);
 
-        // Center items instead of overflowing right edge
-        item.style.left = `50%`;
-        item.style.transform = `translateX(-50%)`;
+        // Scatter items across the screen
+        const randomLeft = 10 + Math.random() * 80; // 10% to 90%
+        item.style.left = `${randomLeft}%`;
 
-        // Slightly random scale with centering
-        const scale = 0.8 + Math.random() * 0.4;
+        // Slightly random scale
+        const scale = 0.6 + Math.random() * 0.6;
         item.style.transform = `translateX(-50%) scale(${scale})`;
 
         // Randomly choose text or photo (80% text, 20% photo)
@@ -161,10 +161,10 @@ class CyberRomanticSection {
         setTimeout(() => this.launchFirework(), 500);
         setTimeout(() => this.launchFirework(), 900);
 
-        // Show close button after 4 seconds of fireworks
+        // Automatically transition to the next page after 10 seconds of fireworks
         setTimeout(() => {
-            if (this.closeBtn) this.closeBtn.classList.add('show');
-        }, 4000);
+            this.stopSequence();
+        }, 10000);
     }
 
     launchFirework() {
